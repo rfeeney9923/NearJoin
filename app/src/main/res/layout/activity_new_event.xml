@@ -1,0 +1,276 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".05" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="34dp">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20px"
+            android:layout_weight=".25" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="New Event"
+            android:id="@+id/newEventTextView"
+            android:layout_weight="0.02"
+            android:layout_gravity="center" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20px"
+            android:layout_weight=".25" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Title:"
+            android:id="@+id/titleTextView"
+            android:layout_weight=".2" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_field"
+            android:layout_weight=".5" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="27dp"
+        android:layout_weight="0.05">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Category:"
+            android:id="@+id/categoryTextView2" />
+
+        <Spinner
+            android:layout_width="107dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/category_select"
+            android:layout_weight="0.22"
+            android:spinnerMode="dropdown" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.00"
+        android:id="@+id/linearLayout6">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Description:   "
+            android:id="@+id/textView3" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/description_field"
+            android:layout_weight=".6" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space5" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.01"
+        android:id="@+id/linearLayout7">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Time:        "
+            android:id="@+id/textView4"
+            android:layout_weight="0.05" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/time_select"
+            android:layout_weight=".6" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space7" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space9" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Location:"
+            android:id="@+id/textView5" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/location_field"
+            android:layout_weight=".6" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space8" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space11" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use Current Location"
+            android:id="@+id/current_location_button" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.02">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space12" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Include phone number in posting"
+            android:id="@+id/include_phone"
+            android:checked="false" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight=".05">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space14" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:id="@+id/submit_button" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight=".2"
+            android:id="@+id/space15" />
+    </LinearLayout>
+</LinearLayout>

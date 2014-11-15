@@ -1,0 +1,330 @@
+{
+ "kind": "discovery#rpcDescription",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/ABvV988APkbdUtG9F2C0uMwuyyQ\"",
+ "discoveryVersion": "v1",
+ "id": "myEvent:v1",
+ "name": "myEvent",
+ "version": "v1",
+ "description": "This is an API",
+ "ownerDomain": "eventBackend.nearjoin.cse.ohio_state.edu",
+ "ownerName": "eventBackend.nearjoin.cse.ohio_state.edu",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rpc",
+ "rootUrl": "https://eternal-calling-763.appspot.com/_ah/api/",
+ "rpcUrl": "https://eternal-calling-763.appspot.com/_ah/api/rpc",
+ "rpcPath": "/_ah/api/rpc",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "CollectionResponse_EventRecord": {
+   "id": "CollectionResponse_EventRecord",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "EventRecord"
+     }
+    },
+    "nextPageToken": {
+     "type": "string"
+    }
+   }
+  },
+  "CollectionResponse_String": {
+   "id": "CollectionResponse_String",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "nextPageToken": {
+     "type": "string"
+    }
+   }
+  },
+  "EventRecord": {
+   "id": "EventRecord",
+   "type": "object",
+   "properties": {
+    "category": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "description": {
+     "type": "string"
+    },
+    "end_date": {
+     "type": "string"
+    },
+    "extraContactInfo": {
+     "type": "string"
+    },
+    "host": {
+     "type": "string"
+    },
+    "host_url": {
+     "type": "string"
+    },
+    "location": {
+     "type": "string"
+    },
+    "participants": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "start_date": {
+     "type": "string"
+    },
+    "status": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "title": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "myEvent.addEvent": {
+   "id": "myEvent.addEvent",
+   "parameters": {
+    "category": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "description": {
+     "type": "string",
+     "required": true
+    },
+    "end_date": {
+     "type": "string",
+     "required": true
+    },
+    "extraContactInfo": {
+     "type": "string",
+     "required": true
+    },
+    "host": {
+     "type": "string",
+     "required": true
+    },
+    "host_url": {
+     "type": "string",
+     "required": true
+    },
+    "location": {
+     "type": "string",
+     "required": true
+    },
+    "start_date": {
+     "type": "string",
+     "required": true
+    },
+    "title": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "category",
+    "description",
+    "end_date",
+    "extraContactInfo",
+    "host",
+    "host_url",
+    "location",
+    "start_date",
+    "title"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "myEvent.addParticipant": {
+   "id": "myEvent.addParticipant",
+   "parameters": {
+    "participant": {
+     "type": "string",
+     "required": true
+    },
+    "title": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "participant",
+    "title"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "myEvent.deleteEvent": {
+   "id": "myEvent.deleteEvent",
+   "parameters": {
+    "title": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "title"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "myEvent.deleteParticipant": {
+   "id": "myEvent.deleteParticipant",
+   "parameters": {
+    "participant": {
+     "type": "string",
+     "required": true
+    },
+    "title": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "participant",
+    "title"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "myEvent.listEvents": {
+   "id": "myEvent.listEvents",
+   "allowGet": true,
+   "returns": {
+    "$ref": "CollectionResponse_EventRecord"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "myEvent.listEventsByCategory": {
+   "id": "myEvent.listEventsByCategory",
+   "allowGet": true,
+   "parameters": {
+    "category": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "category"
+   ],
+   "returns": {
+    "$ref": "CollectionResponse_EventRecord"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "myEvent.listEventsByHost": {
+   "id": "myEvent.listEventsByHost",
+   "allowGet": true,
+   "parameters": {
+    "host": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "host"
+   ],
+   "returns": {
+    "$ref": "CollectionResponse_EventRecord"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "myEvent.listParticipants": {
+   "id": "myEvent.listParticipants",
+   "allowGet": true,
+   "parameters": {
+    "title": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "title"
+   ],
+   "returns": {
+    "$ref": "CollectionResponse_String"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}

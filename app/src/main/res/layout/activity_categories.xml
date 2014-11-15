@@ -1,0 +1,144 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="44dp"
+        android:layout_weight="0.02"></LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="74dp"
+        android:weightSum="1"
+        android:layout_weight="0.14">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_weight=".025" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Sports"
+            android:id="@+id/sportsButton"
+            android:layout_weight=".95" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20px"
+            android:layout_weight=".025" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="74dp"
+        android:weightSum="1"
+        android:id="@+id/linearLayout"
+        android:layout_weight="0.14">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_weight=".025" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Education"
+            android:id="@+id/educationButton"
+            android:layout_weight="0.95" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20px"
+            android:layout_weight=".025" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="74dp"
+        android:weightSum="1"
+        android:id="@+id/linearLayout2"
+        android:layout_weight="0.14">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20px"
+            android:layout_weight="0.025" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Entertainment"
+            android:id="@+id/entertainmentButton"
+            android:layout_weight="0.95" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20px"
+            android:layout_weight=".025" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="74dp"
+        android:weightSum="1"
+        android:id="@+id/linearLayout3"
+        android:layout_weight="0.14">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20px"
+            android:layout_weight=".025" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="Other"
+            android:id="@+id/otherButton"
+            android:layout_weight="0.95" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20px"
+            android:layout_weight=".025" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25px"
+        android:layout_weight="0.39" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="List"
+            android:id="@+id/listButton"
+            android:layout_weight="0.50" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Map"
+            android:id="@+id/mapButton"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+
+</LinearLayout>

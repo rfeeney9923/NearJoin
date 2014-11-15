@@ -1,0 +1,179 @@
+{
+ "kind": "discovery#restDescription",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/JSpGyroX5Dgq_LLxLfH1ABxjmGg\"",
+ "discoveryVersion": "v1",
+ "id": "myUser:v1",
+ "name": "myUser",
+ "version": "v1",
+ "description": "This is an API",
+ "ownerDomain": "eventBackend.nearjoin.cse.ohio_state.edu",
+ "ownerName": "eventBackend.nearjoin.cse.ohio_state.edu",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rest",
+ "baseUrl": "https://eternal-calling-763.appspot.com/_ah/api/myUser/v1/",
+ "basePath": "/_ah/api/myUser/v1/",
+ "rootUrl": "https://eternal-calling-763.appspot.com/_ah/api/",
+ "servicePath": "myUser/v1/",
+ "batchPath": "batch",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "CollectionResponse_UserRecord": {
+   "id": "CollectionResponse_UserRecord",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "UserRecord"
+     }
+    },
+    "nextPageToken": {
+     "type": "string"
+    }
+   }
+  },
+  "UserRecord": {
+   "id": "UserRecord",
+   "type": "object",
+   "properties": {
+    "name": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "add": {
+   "id": "myUser.add",
+   "path": "addUser/{name}",
+   "httpMethod": "POST",
+   "parameters": {
+    "name": {
+     "type": "string",
+     "required": true,
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "name"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "delete": {
+   "id": "myUser.delete",
+   "path": "user/{name}",
+   "httpMethod": "DELETE",
+   "parameters": {
+    "name": {
+     "type": "string",
+     "required": true,
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "name"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "listUsers": {
+   "id": "myUser.listUsers",
+   "path": "userrecord/{count}",
+   "httpMethod": "GET",
+   "parameters": {
+    "count": {
+     "type": "integer",
+     "required": true,
+     "format": "int32",
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "count"
+   ],
+   "response": {
+    "$ref": "CollectionResponse_UserRecord"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "update": {
+   "id": "myUser.update",
+   "path": "void/{name}",
+   "httpMethod": "PUT",
+   "parameters": {
+    "name": {
+     "type": "string",
+     "required": true,
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "name"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}

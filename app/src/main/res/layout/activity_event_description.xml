@@ -1,0 +1,204 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/linearLayout"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="41dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Title"
+            android:id="@+id/event_title"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="73dp"
+        android:weightSum="1"
+        android:id="@+id/linearLayout2" >
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/space7"
+            android:layout_weight="0.48" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:id="@+id/event_category"
+            android:layout_gravity="center_horizontal" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="125dp"
+            android:layout_height="79dp" >
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:id="@+id/space8"
+                android:layout_weight="0.48" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Host Name"
+                android:id="@+id/host_name" />
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_picture"
+            android:minHeight="75dp"
+            android:minWidth="75dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="53dp"
+        android:weightSum="1"
+        android:id="@+id/linearLayout3" >
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/space9"
+            android:layout_weight="0.48" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/host_rating" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:weightSum="1"
+        android:id="@+id/linearLayout4" >
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="82dp"
+            android:id="@+id/space10"
+            android:layout_weight="0.39" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What"
+            android:id="@+id/textView10"
+            android:layout_weight="0.17" />
+
+        <EditText
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/description" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="31dp"
+        android:weightSum="1"
+        android:id="@+id/linearLayout5" >
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="91dp"
+            android:id="@+id/space11"
+            android:layout_weight="0.30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="When"
+            android:id="@+id/textView11"
+            android:layout_weight="0.13" />
+
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:layout_weight="0.36" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="47dp"
+        android:weightSum="1"
+        android:id="@+id/linearLayout6" >
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="100dp"
+            android:id="@+id/space12"
+            android:layout_weight="0.42" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Where"
+            android:id="@+id/textView12"
+            android:layout_weight="0.15" />
+
+        <EditText
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/location" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1" >
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.51" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recieve Notification"
+            android:id="@+id/notification"
+            android:checked="false" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="249dp"
+        android:layout_height="96dp"
+        android:id="@+id/attendees"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:text="Attend"
+        android:id="@+id/attend_button"
+        android:layout_gravity="center_horizontal"
+        android:background="#ff87ff71"
+        android:layout_weight="0.21" />
+</LinearLayout>
