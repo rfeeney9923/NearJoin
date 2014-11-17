@@ -207,7 +207,7 @@ public class MessagingEndpoint {
         for(EventRecord event : events)
         {
             if(event.getCategory()!=category)
-                return;
+                continue;
 
             //double dist = CalDistance();
             //if(dist>distance)

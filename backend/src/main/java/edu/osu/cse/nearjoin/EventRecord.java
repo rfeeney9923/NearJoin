@@ -1,11 +1,13 @@
 package edu.osu.cse.nearjoin;
 
 
+import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /** The Objectify object model for device registrations we are persisting */
@@ -39,6 +41,8 @@ public class EventRecord {
 
     private String extraContactInfo;
 
+    private long timeStamp;
+
     private ArrayList<String> participants = new ArrayList<String>();
 
     public EventRecord() {}
@@ -57,6 +61,9 @@ public class EventRecord {
 
         this.status = BEFORE; // the status is BEFORE when it is created.
         participants = new ArrayList<String>();
+
+        DateTime dt = new DateTime(new Date());
+        timeStamp = dt.getValue();
     }
 
 
@@ -124,6 +131,8 @@ public class EventRecord {
     public String getTitle(){
         return this.title;
     }
+    public void setTimeStamp(long stamp){this.timeStamp = stamp;}
+    public long getTimeStamp(){return this.timeStamp;}
 
     // be careful the format of Event!!!
     public String toString(){

@@ -35,7 +35,7 @@ public final class GcmApiWrapper {
         ArrayList<String> list = new ArrayList<String>();
         list.add(event_title);
         list.add(user);
-        new GcmAddParticipantAsyncTask().execute(list);
+        new GcmDeleteParticipantAsyncTask().execute(list);
     }
     public static void browseEventDetails(String event_title)
     {

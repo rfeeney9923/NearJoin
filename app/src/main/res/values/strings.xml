@@ -47,6 +47,7 @@
     <string name="category_post_event_text">Category: </string>
     <string name="phone_post_event_text">Phone: </string>
     <string name="description_post_event_text">Description: </string>
+    <string name="participants_browse_event_text">Participants: </string>
 
     <string name="host_image_description">Host Image Description</string>
 

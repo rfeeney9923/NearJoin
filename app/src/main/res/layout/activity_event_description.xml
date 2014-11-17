@@ -195,10 +195,10 @@
 
     <Button
         android:layout_width="78dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="Attend"
         android:id="@+id/attend_button"
         android:layout_gravity="center_horizontal"
         android:background="#ff87ff71"
-        android:layout_weight="0.21" />
+        android:layout_weight="0.68" />
 </LinearLayout>

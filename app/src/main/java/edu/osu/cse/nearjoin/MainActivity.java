@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,6 +54,9 @@ public class MainActivity extends Activity {
 
     // load event-list-fragment or event-map-fragment
     private View eventContentLayout;
+
+    private final int selectedBackgroundColor = Color.argb(255,100,100,100);
+    private final int unSelectedTextColor = Color.parseColor("#82858b");
 
     // category
     private View studyLayout;
@@ -92,7 +96,7 @@ public class MainActivity extends Activity {
                         if(event!=null)
                         {
                             int event_category = event.getCategory();
-                            HashMap<String,String> new_cell_data = getCellDataFromEvent(event);
+
                             switch (event_category){
                                 case 1: studyList.add(event);           break;
                                 case 2: sportList.add(event);           break;
@@ -102,6 +106,7 @@ public class MainActivity extends Activity {
                                 default:othersList.add(event);          break;
                             }
 
+                            HashMap<String,String> new_cell_data = getCellDataFromEvent(event);
                             eventListFragment.updateData(event_category,new_cell_data);
                         }
                     } else {
@@ -120,6 +125,8 @@ public class MainActivity extends Activity {
         }
     };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +136,8 @@ public class MainActivity extends Activity {
         initViews();
         fragmentManager = getFragmentManager();
         setEventContentFragment(0);
+        listLayout.setBackgroundColor(selectedBackgroundColor);
+        studyTextView.setTextColor(Color.BLUE);
 
         MAIN_CONTEXT = this;
         GcmApiWrapper.register(userName,password);
@@ -183,7 +192,7 @@ public class MainActivity extends Activity {
     };
 
     public void onClick(View v) {
-        int selectedBackgroundColor = Color.argb(255,100,100,100);
+
         clearSelection();
         switch (v.getId()) {
             case R.id.map_layout:
@@ -282,7 +291,6 @@ public class MainActivity extends Activity {
          //entertainmentImage.setImageResource(R.drawable.news_unselected);
          //othersImage.setImageResource(R.drawable.setting_unselected);
 
-         int unSelectedTextColor = Color.parseColor("#82858b");
          studyTextView.setTextColor(unSelectedTextColor);
          sportTextView.setTextColor(unSelectedTextColor);
          entertainmentTextView.setTextColor(unSelectedTextColor);
@@ -372,7 +380,19 @@ public class MainActivity extends Activity {
         cell.put("title", event.getTitle());
         cell.put("time", event.getStartDate());
         cell.put("location", event.getLocation());
-        cell.put("participants", event.getParticipants().toString());
+        cell.put("host", event.getHost());
+        cell.put("host_url", event.getHostUrl());
+        cell.put("duration", event.getEndDate());
+        cell.put("description", event.getDescription());
+        cell.put("status", event.getStatus().toString());
+        cell.put("extraContactInfo", event.getExtraContactInfo());
+
+        List<String> participants = event.getParticipants();
+        StringBuilder builder = new StringBuilder(512);
+        for(String participant: participants ){
+            builder.append(participant);    builder.append(",");
+        }
+        cell.put("participants", builder.toString());
 
         return cell;
     }

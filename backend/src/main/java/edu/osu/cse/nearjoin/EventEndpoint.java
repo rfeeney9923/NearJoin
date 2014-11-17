@@ -5,7 +5,9 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
+import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -99,6 +101,7 @@ public class EventEndpoint {
             event.setExtraContactInfo(extraContactInfo);
             event.setStatus(1); // BEFORE = 1
             event.addParticipant(host);
+            event.setTimeStamp(new DateTime(new Date()).getValue());
 
             ofy().save().entity(event).now();
             return;
@@ -174,6 +177,9 @@ public class EventEndpoint {
         }
         event.addParticipant(participant);
         ofy().save().entity(event).now();    // async without the now()
+
+        // inform all participants that a new participant joined the event
+
     }
 
     @ApiMethod(name = "listParticipants", path = "eventrecord/listParticipants")
@@ -195,6 +201,14 @@ public class EventEndpoint {
         }
         event.deleteParticipant(participant);
         ofy().save().entity(event).now();    // async without the now()
+
+        // inform all participants that a participant dropped the event
+        //List<String> participants = event.getParticipants();
+        //for(String p : participants )
+        //{
+        //    RegistrationRecord user = ofy().load().type(RegistrationRecord.class).filter("userName", p).first().now();
+        //    sendEvents();
+        //}
     }
 
     /*
@@ -217,5 +231,7 @@ public class EventEndpoint {
             return;
         }
         ofy().delete().entity(event).now();
+
+        // inform all participants that the event is deleted.
     }
 }

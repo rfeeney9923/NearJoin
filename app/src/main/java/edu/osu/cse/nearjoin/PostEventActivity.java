@@ -32,10 +32,10 @@ public class PostEventActivity extends Activity{
         postButton = (Button) findViewById(R.id.post_post_event_button);
         titleEditText = (EditText) findViewById(R.id.title_post_event_editText);
         durationEditText = (EditText) findViewById(R.id.duration_post_event_editText);
-        timeEditText = (EditText) findViewById(R.id.time_post_event_editText);
-        locationEditText = (EditText) findViewById(R.id.location_post_event_editText);
+        timeEditText = (EditText) findViewById(R.id.time_browse_event_editText);
+        locationEditText = (EditText) findViewById(R.id.location_browse_event_editText);
         categoryEditText = (EditText) findViewById(R.id.category_post_event_editText);
-        phoneEditText = (EditText) findViewById(R.id.phone_post_event_editText);
+        phoneEditText = (EditText) findViewById(R.id.phone_browse_event_editText);
         descriptionEditText = (EditText)findViewById(R.id.description_post_event_editText);
     }
 

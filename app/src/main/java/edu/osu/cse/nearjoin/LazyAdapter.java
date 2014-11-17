@@ -36,9 +36,9 @@ public class LazyAdapter extends ArrayAdapter<EventRecord> {
             vi = inflater.inflate(R.layout.event_listrow, parent, false);
 
         TextView title = (TextView)vi.findViewById(R.id.title_post_event_editText); // title
-        TextView time = (TextView)vi.findViewById(R.id.time_post_event_editText); // time
+        TextView time = (TextView)vi.findViewById(R.id.time_browse_event_editText); // time
         TextView duration = (TextView)vi.findViewById(R.id.duration_post_event_editText); // duration
-        TextView location = (TextView)vi.findViewById(R.id.location_post_event_editText); // location
+        TextView location = (TextView)vi.findViewById(R.id.location_browse_event_editText); // location
         TextView participants = (TextView)vi.findViewById(R.id.eventParticipant_cell_listView);
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.host_image_cell_listView); // thumb image
 

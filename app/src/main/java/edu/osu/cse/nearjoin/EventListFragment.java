@@ -1,6 +1,7 @@
 package edu.osu.cse.nearjoin;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ public class EventListFragment extends ListFragment {
         searchList = new ArrayList<HashMap<String,String>>();
 
         // Keys used in Hashmap
-        String[] from = { "title","time","location","participant" };
+        String[] from = { "title","time","location","participants" };
 
         // Ids of views in listview_layout
         int[] to = { R.id.eventTitle_cell_listView,R.id.eventTime_cell_listView,R.id.eventLocation_cell_listView, R.id.eventParticipant_cell_listView};
@@ -78,22 +79,37 @@ public class EventListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
- /*
-        EventRecord event = adapter.getItem(position);
-        transaction = manager.beginTransaction();
 
-        DetailFragment detailFragment = new DetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("id", str);
-        detailFragment.setArguments(bundle);
-        transaction.replace(R.id.right, detailFragment, "detail");
-        transaction.commit();
-        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
- */
+        HashMap<String,String> details;
+        switch (category)
+        {
+            case 1: details = studyList.get(position);           break;
+            case 2: details = sportList.get(position);           break;
+            case 3: details = entertainmentList.get(position);   break;
+            case 4: details = othersList.get(position);        break;
+            case 5: details = searchList.get(position);      break;
+            default:details = othersList.get(position);       break;
+        }
+
+        Intent i = new Intent(getActivity(), EventDetailsActivity.class);
+        i.putExtra("title", details.get("title"));
+        i.putExtra("time", details.get("time"));
+        i.putExtra("location",details.get("location"));
+        i.putExtra("participants", details.get("participants"));
+        i.putExtra("host", details.get("host"));
+        i.putExtra("host_url", details.get("host_url"));
+        i.putExtra("duration", details.get("duration"));
+        i.putExtra("description", details.get("description"));
+        i.putExtra("status", details.get("status"));
+        i.putExtra("extraContactInfo", details.get("extraContactInfo"));
+        i.putExtra("category", category);
+
+        startActivity(i);
     }
 
     public void updateCategory(int c)
     {
+        category = c;
         switch (c){
             case 1:
                 if(studyAdapter!=null){
