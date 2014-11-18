@@ -141,6 +141,14 @@ public class MainActivity extends Activity {
 
         MAIN_CONTEXT = this;
         GcmApiWrapper.register(userName,password);
+
+        // create the attendance code
+        char c1 =(char)( 96 + (int)(Math.random()*26) );
+        char c2 =(char)( 96 + (int)(Math.random()*26) );
+        char c3 =(char)( 96 + (int)(Math.random()*26) );
+        char c4 =(char)( 96 + (int)(Math.random()*26) );
+        String tmp = ""+c1+c2+c3+c4;
+        int a =0;
     }
     @Override
     protected void onResume()
@@ -339,7 +347,7 @@ public class MainActivity extends Activity {
         int components_length = components.length;
 
         // check the format!!!
-        if(components_length!=11)
+        if(components_length!=13)
         {
             // wrong format of event
             return null;
@@ -354,11 +362,20 @@ public class MainActivity extends Activity {
         String new_event_host = components[7];
         String new_event__host_url = components[8];
         String new_event_extraContactInfo = components[9];
+
         String new_event_participants = components[10];
         String[] participantsArray = new_event_participants.split(",");
         ArrayList<String> new_event_participantsList = new ArrayList<String>(participantsArray.length);
         for(int i=0;i<participantsArray.length;i++)
             new_event_participantsList.add(participantsArray[i]);
+
+        String new_event_valid_participants = components[11];
+        String[] validParticipantsArray = new_event_valid_participants.split(",");
+        ArrayList<String> new_event_valid_participantsList = new ArrayList<String>(validParticipantsArray.length);
+        for(int i=0;i<validParticipantsArray.length;i++)
+            new_event_valid_participantsList.add(validParticipantsArray[i]);
+
+        String new_event_attendance_code = components[12];
 
         new_event.setTitle(new_event_title);
         new_event.setCategory(new_event_category);
@@ -370,7 +387,11 @@ public class MainActivity extends Activity {
         new_event.setHost(new_event_host);
         new_event.setHostUrl(new_event__host_url);
         new_event.setExtraContactInfo(new_event_extraContactInfo);
+
         new_event.setParticipants(new_event_participantsList);
+        new_event.setValidatedParticipants(new_event_valid_participantsList);
+
+        new_event.setAttendanceCode(new_event_attendance_code);
 
         return new_event;
     }
@@ -386,6 +407,8 @@ public class MainActivity extends Activity {
         cell.put("description", event.getDescription());
         cell.put("status", event.getStatus().toString());
         cell.put("extraContactInfo", event.getExtraContactInfo());
+
+        cell.put("attendance_code", event.getAttendanceCode());
 
         List<String> participants = event.getParticipants();
         StringBuilder builder = new StringBuilder(512);

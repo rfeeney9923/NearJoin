@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/ABvV988APkbdUtG9F2C0uMwuyyQ\"",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/Z_9t1sV5O4dQrOFEsTQjnvE6Ipk\"",
  "discoveryVersion": "v1",
  "id": "myEvent:v1",
  "name": "myEvent",
@@ -107,6 +107,9 @@
    "id": "EventRecord",
    "type": "object",
    "properties": {
+    "attendanceCode": {
+     "type": "string"
+    },
     "category": {
      "type": "integer",
      "format": "int32"
@@ -142,8 +145,18 @@
      "type": "integer",
      "format": "int32"
     },
+    "timeStamp": {
+     "type": "string",
+     "format": "int64"
+    },
     "title": {
      "type": "string"
+    },
+    "validatedParticipants": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
     }
    }
   }
@@ -235,6 +248,30 @@
    "parameterOrder": [
     "participant",
     "title"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "addValidatedParticipant": {
+   "id": "myEvent.addValidatedParticipant",
+   "path": "addValidatedParticipant",
+   "httpMethod": "POST",
+   "parameters": {
+    "title": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    },
+    "validatedParticipant": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "title",
+    "validatedParticipant"
    ],
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

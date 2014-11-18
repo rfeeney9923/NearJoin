@@ -69,16 +69,17 @@
         android:layout_marginTop="28dp" />
 
     <Button
-        android:layout_width="80dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:id="@+id/cancel_browse_event_button"
         android:layout_toEndOf="@+id/textView9"
-        android:layout_alignParentBottom="true"
         android:onClick="onClick"
-        android:text="@string/cancel_post_event_button_text" />
+        android:text="@string/cancel_post_event_button_text"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView13" />
 
     <Button
-        android:layout_width="80dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="@string/post_post_event_button_text"
         android:id="@+id/post_browse_event_button"
@@ -178,9 +179,10 @@
     <Button
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Attendance"
+        android:text="@string/attendance_post_event_button_text"
         android:id="@+id/check_attendance_browse_event_button"
         android:layout_toEndOf="@+id/post_browse_event_button"
-        android:layout_below="@+id/participants_browse_event_editText" />
+        android:layout_alignParentBottom="true"
+        android:onClick="onClick" />
 
 </RelativeLayout>

@@ -125,14 +125,16 @@ public class EventRecord {
         if(!validatedParticipants.contains(participant))
             this.validatedParticipants.add(participant);
     }
-    public List<String> getValidatedParticipants(){
-        return this.validatedParticipants;
-    }
+
+    public void setValidatedParticipants(ArrayList<String> list){this.validatedParticipants = list;}
+    public List<String> getValidatedParticipants(){ return this.validatedParticipants;  }
+
     public void setAttendanceCode(String attendance_code){this.attendance_code = attendance_code;}
     public String getAttendanceCode(){return  this.attendance_code;}
-    public List<String> getParticipants(){
-        return this.participants;
-    }
+
+    public void setParticipants(ArrayList<String> list){ this.participants = list;   }
+    public List<String> getParticipants(){ return this.participants;    }
+
     public void setStatus(int status){
         this.status = status;
     }
@@ -171,6 +173,7 @@ public class EventRecord {
             builder.append(participant);                builder.append(",");
         }
         builder.append(";");
+
         builder.append(attendance_code);
         //builder.append(";"); // no need for the last field
         return builder.toString();
@@ -185,7 +188,7 @@ public class EventRecord {
         int components_length = components.length;
 
         // check the format!!!
-        if(components_length!=11)
+        if(components_length!=13)
         {
             // wrong format of event
             return null;
@@ -200,14 +203,19 @@ public class EventRecord {
         String new_event_host = components[7];
         String new_event__host_url = components[8];
         String new_event_extraContactInfo = components[9];
+
         String new_event_participants = components[10];
         String[] participantsArray = new_event_participants.split(",");
         ArrayList<String> new_event_participantsList = new ArrayList<String>(participantsArray.length);
         for(int i=0;i<participantsArray.length;i++)
             new_event_participantsList.add(participantsArray[i]);
+
         String new_event_valid_participants = components[11];
         String[] validParticipantsArray = new_event_valid_participants.split(",");
         ArrayList<String> new_event_valid_participantsList = new ArrayList<String>(validParticipantsArray.length);
+        for(int i=0;i<validParticipantsArray.length;i++)
+            new_event_valid_participantsList.add(validParticipantsArray[i]);
+
         String new_event_attendance_code = components[12];
 
         new_event.setTitle(new_event_title);
@@ -220,9 +228,11 @@ public class EventRecord {
         new_event.setHost(new_event_host);
         new_event.setHost_url(new_event__host_url);
         new_event.setExtraContactInfo(new_event_extraContactInfo);
-        new_event.participants = new_event_participantsList;
-        new_event.validatedParticipants = new_event_valid_participantsList;
-        new_event.attendance_code = new_event_attendance_code;
+
+        new_event.setParticipants(new_event_participantsList);
+        new_event.setValidatedParticipants(new_event_valid_participantsList);
+
+        new_event.setAttendanceCode(new_event_attendance_code);
 
         return new_event;
     }

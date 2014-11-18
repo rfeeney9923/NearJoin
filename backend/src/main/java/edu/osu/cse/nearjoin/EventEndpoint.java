@@ -103,6 +103,13 @@ public class EventEndpoint {
             //event.addParticipant(host);
             event.setTimeStamp(new DateTime(new Date()).getValue());
 
+            // create the attendance code
+            char c1 =(char)( 97 + (int)(Math.random()*25) );
+            char c2 =(char)( 97 + (int)(Math.random()*25) );
+            char c3 =(char)( 97 + (int)(Math.random()*25) );
+            char c4 =(char)( 97 + (int)(Math.random()*25) );
+            event.setAttendanceCode(""+c1+c2+c3+c4);
+
             ofy().save().entity(event).now();
             return;
         }
@@ -122,52 +129,6 @@ public class EventEndpoint {
         ofy().save().entity(event).now();
     }
 
-/*
-    @ApiMethod(name = "updateDate", path="eventrecord/date")
-    public void updateDate(@Named("title") String title,@Named("date") Date date) {
-        EventRecord event = findEvent(title);
-        if(event == null) {
-            log.info("Event " + event + " not created, skip updating");
-            return;
-        }
-        event.setStart_date(date);
-        ofy().save().entity(event).now();    // async without the now()
-    }
-
-
-    @ApiMethod(name = "updateLocation",path="eventrecord/location")
-    public void updateLocation(@Named("title") String title,@Named("location") String location) {
-        EventRecord event = findEvent(title);
-        if(event == null) {
-            log.info("Event " + event + " not created, skip updating");
-            return;
-        }
-        event.setLocation(location);
-        ofy().save().entity(event).now();    // async without the now()
-    }
-
-    @ApiMethod(name = "updateDescription", path="eventrecord/description")
-    public void updateDescription(@Named("title") String title,@Named("description") String description) {
-        EventRecord event = findEvent(title);
-        if(event == null) {
-            log.info("Event " + event + " not created, skip updating");
-            return;
-        }
-        event.setDescription(description);
-        ofy().save().entity(event).now();    // async without the now()
-    }
-
-    @ApiMethod(name = "updateExtraContactInfo", path="eventrecord/extraContactInfo")
-    public void updateExtraContactInfo(@Named("title") String title,@Named("extraContactInfo") String extraContactInfo) {
-        EventRecord event = findEvent(title);
-        if(event == null) {
-            log.info("Event " + event + " not created, skip updating");
-            return;
-        }
-        event.setExtraContactInfo(extraContactInfo);
-        ofy().save().entity(event).now();    // async without the now()
-    }
-*/
     @ApiMethod(name = "addValidatedParticipant", path = "eventrecord/addValidatedParticipant")
     public void addValidatedParticipant(@Named("title") String title,@Named("validatedParticipant") String participant) {
         EventRecord event = findEvent(title);

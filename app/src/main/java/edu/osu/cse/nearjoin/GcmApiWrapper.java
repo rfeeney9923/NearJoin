@@ -23,6 +23,14 @@ public final class GcmApiWrapper {
     {
         new GcmDeleteEventAsyncTask().execute(event_title);
     }
+    public static void addValidatedParticipant(String event_title, String user)
+    {
+        ArrayList<String> list = new ArrayList<String>();
+        list.add(event_title);
+        list.add(user);
+        new GcmAddValidatedParticipantAsyncTask().execute(list);
+    }
+
     public static void addParticipant(String event_title, String user)
     {
         ArrayList<String> list = new ArrayList<String>();

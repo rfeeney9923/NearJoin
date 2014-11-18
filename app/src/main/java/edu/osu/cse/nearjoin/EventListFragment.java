@@ -101,7 +101,9 @@ public class EventListFragment extends ListFragment {
         i.putExtra("duration", details.get("duration"));
         i.putExtra("description", details.get("description"));
         i.putExtra("status", details.get("status"));
+        i.putExtra("attendance_code", details.get("attendance_code"));
         i.putExtra("extraContactInfo", details.get("extraContactInfo"));
+
         i.putExtra("category", category);
 
         startActivity(i);

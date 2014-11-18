@@ -2,10 +2,10 @@ package edu.osu.cse.nearjoin;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,6 +54,7 @@ public class EventDetailsActivity extends Activity {
         cancelButton = (Button) findViewById(R.id.cancel_browse_event_button);
         postButton = (Button) findViewById(R.id.post_browse_event_button);
         attendanceButton = (Button) findViewById(R.id.check_attendance_browse_event_button);
+
         titleEditText = (EditText) findViewById(R.id.title_browse_event_editText);
         titleEditText.setText(event.getTitle());
         durationEditText = (EditText) findViewById(R.id.duration_browse_event_editText);
@@ -101,11 +102,10 @@ public class EventDetailsActivity extends Activity {
                 postButton.setText("Join");
                 cancelButton.setText("Cancel");
             }
-
         }
         else{
             postButton.setText("Update");
-            cancelButton.setText("Cancel");
+            cancelButton.setText("Delete");
         }
     }
 
@@ -125,17 +125,18 @@ public class EventDetailsActivity extends Activity {
                             .show();
                 }
                 else{
-                    dropEvent();
+                    if(isJoined)
+                        dropEvent();
                 }
                 break;
             case R.id.post_browse_event_button:
                 if(isHost)
                     updateEvent();
                 else
-                if(isJoined)
-                    checkIn();
-                else
-                    joinEvent();
+                    if(isJoined)
+                        checkIn();
+                    else
+                        joinEvent();
                 break;
             case R.id.check_attendance_browse_event_button:
                 checkAttendance();
@@ -145,82 +146,79 @@ public class EventDetailsActivity extends Activity {
     }
 
     private void checkAttendance(){
-        String attendanceCode;
-        //generate random authentication string
-        attendanceCode = "QgTyB";  //string generation code still needed
-        //push authentication string to database
-        event.setAttendanceCode(attendanceCode);
-        //Display Authentication Code to Host
+        String tmp = event.getAttendanceCode();
         new AlertDialog.Builder(this)
                 .setTitle("Attendance Code")
-                .setMessage(attendanceCode)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
+                .setMessage(tmp)
+                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
+                        Toast.makeText(getApplicationContext(), "Attendance checked", Toast.LENGTH_LONG).show();
+                     }
                 })
                 .show();
     }
+
     private void checkIn(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Check In Code");
+        final Context c = this;
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Check In Code");
+        alert.setMessage("Get the Attendance Code from Host");
 
-        // Set up the input
+        // Set an EditText view to get user input
         final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
+        alert.setView(input);
 
-        // Set up the buttons
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                authentication = input.getText().toString();
-                dialog.dismiss();
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String value = input.getText().toString();
+                Toast.makeText(getApplicationContext(), "dialog text:"+value, Toast.LENGTH_LONG).show();
+
+                //check authentication variable against database
+                String attendance_code =event.getAttendanceCode();
+
+                //if validated, add user to list of validated participants
+                //And notify the user of success
+                if(value.equals(attendance_code) ){
+                    AlertDialog.Builder alert2 = new AlertDialog.Builder(c);
+                    alert2 = new AlertDialog.Builder(c);
+                    alert2.setTitle("Check In");
+                    alert2.setMessage("Authentication Successful");
+
+                    // add validated participant to the event
+                    GcmApiWrapper.addValidatedParticipant(event.getTitle(),MainActivity.userName);
+
+                    // Set up the buttons
+                    alert2.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //dialog.dismiss();
+                        }
+                    });
+                    alert2.show();
+                }
+                //else display an error message to the user
+                else {
+                    AlertDialog.Builder alert3 = new AlertDialog.Builder(c);
+                    alert3 = new AlertDialog.Builder(c);
+                    alert3.setTitle("Check In");
+                    alert3.setMessage("Invalid Check In Code");
+                    // Set up the buttons
+                    alert3.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    alert3.show();
+                }
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
             }
         });
-        builder.show();
 
-        //check authentication variable against database
-        String attendance_code =event.getAttendanceCode();
-
-        //if validated, add user to list of validated participants
-
-
-
-        //And notify the user of success
-        if(authentication == attendance_code){
-            builder = new AlertDialog.Builder(this);
-            builder.setTitle("Check In");
-            builder.setMessage("Authentication Successful");
-            // Set up the buttons
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.show();
-        }
-        //else display an error message to the user
-        else {
-            builder = new AlertDialog.Builder(this);
-            builder.setTitle("Check In");
-            builder.setMessage("Invalid Check In Code");
-            // Set up the buttons
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            builder.show();
-        }
+        alert.show();
     }
     private void dropEvent()
     {
@@ -295,7 +293,10 @@ public class EventDetailsActivity extends Activity {
         event.setDescription(extras.getString("description"));
         event.setStatus(Integer.parseInt(extras.getString("status")));
         event.setExtraContactInfo(extras.getString("extraContactInfo"));
-        String[] participantsArray = extras.getString("participants").split(",; ");
+
+        event.setAttendanceCode(extras.getString("attendance_code"));
+
+        String[] participantsArray = extras.getString("participants").split(",");
         ArrayList<String> participantsList = new ArrayList<String>();
         for(int i=0;i<participantsArray.length;i++)
             participantsList.add(participantsArray[i]);
