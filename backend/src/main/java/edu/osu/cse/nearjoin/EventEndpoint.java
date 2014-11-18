@@ -100,7 +100,7 @@ public class EventEndpoint {
             event.setDescription(description);
             event.setExtraContactInfo(extraContactInfo);
             event.setStatus(1); // BEFORE = 1
-            event.addParticipant(host);
+            //event.addParticipant(host);
             event.setTimeStamp(new DateTime(new Date()).getValue());
 
             ofy().save().entity(event).now();
@@ -168,6 +168,19 @@ public class EventEndpoint {
         ofy().save().entity(event).now();    // async without the now()
     }
 */
+    @ApiMethod(name = "addValidatedParticipant", path = "eventrecord/addValidatedParticipant")
+    public void addValidatedParticipant(@Named("title") String title,@Named("validatedParticipant") String participant) {
+        EventRecord event = findEvent(title);
+            if(event == null) {
+                log.info("Event " + event + " not created, skip updating");
+            return;
+        }
+        event.addValidatedParticipant(participant);
+        ofy().save().entity(event).now();    // async without the now()
+
+    // inform all participants that a new participant joined the event
+}
+
     @ApiMethod(name = "addParticipant", path = "eventrecord/addParticipant")
     public void addParticipant(@Named("title") String title,@Named("participant") String participant) {
         EventRecord event = findEvent(title);

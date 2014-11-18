@@ -210,7 +210,7 @@ public class MainActivity extends Activity {
                 break;
             case R.id.settings_layout:
                 // start settings activity
-
+                startActivity(new Intent(this,SettingsActivity.class));
                 settingsLayout.setBackgroundColor(selectedBackgroundColor);
                 break;
             case R.id.study_layout:

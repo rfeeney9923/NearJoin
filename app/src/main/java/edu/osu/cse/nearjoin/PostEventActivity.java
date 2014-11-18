@@ -85,7 +85,7 @@ public class PostEventActivity extends Activity{
 */
 
         EventRecord event = new EventRecord();
-        event.setHost("Quan Yu");
+        event.setHost(MainActivity.userName);
         event.setHostUrl("");
         event.setTitle(title);
         event.setStartDate(time);

@@ -83,9 +83,8 @@
         android:text="@string/post_post_event_button_text"
         android:id="@+id/post_browse_event_button"
         android:layout_toEndOf="@+id/cancel_browse_event_button"
-        android:layout_marginLeft="100dp"
-        android:layout_alignParentBottom="true"
-        android:onClick="onClick" />
+        android:onClick="onClick"
+        android:layout_below="@+id/participants_browse_event_editText" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -175,5 +174,13 @@
         android:layout_alignTop="@+id/textView14"
         android:layout_alignEnd="@+id/description_browse_event_editText"
         android:layout_above="@+id/cancel_browse_event_button" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Attendance"
+        android:id="@+id/check_attendance_browse_event_button"
+        android:layout_toEndOf="@+id/post_browse_event_button"
+        android:layout_below="@+id/participants_browse_event_editText" />
 
 </RelativeLayout>

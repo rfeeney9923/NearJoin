@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ public class EventDetailsActivity extends Activity {
 
     private Button cancelButton;
     private Button postButton;
+    private Button attendanceButton;
     private EditText titleEditText;
     private EditText timeEditText;
     private EditText durationEditText;
@@ -33,6 +35,7 @@ public class EventDetailsActivity extends Activity {
 
     private boolean isHost;
     private boolean isJoined;
+    public String authentication;
 
     EventRecord event;
 
@@ -43,7 +46,6 @@ public class EventDetailsActivity extends Activity {
 
         event = new EventRecord();
         getIntentExtra();
-
         if (event.getHost().equals(MainActivity.userName) )
             isHost = true;
         else
@@ -51,6 +53,7 @@ public class EventDetailsActivity extends Activity {
 
         cancelButton = (Button) findViewById(R.id.cancel_browse_event_button);
         postButton = (Button) findViewById(R.id.post_browse_event_button);
+        attendanceButton = (Button) findViewById(R.id.check_attendance_browse_event_button);
         titleEditText = (EditText) findViewById(R.id.title_browse_event_editText);
         titleEditText.setText(event.getTitle());
         durationEditText = (EditText) findViewById(R.id.duration_browse_event_editText);
@@ -84,51 +87,141 @@ public class EventDetailsActivity extends Activity {
             categoryEditText.setEnabled(false);
             phoneEditText.setEnabled(false);
             descriptionEditText.setEnabled(false);
-            cancelButton.setEnabled(false);
+            attendanceButton.setEnabled(false);
 
             if(participants.contains(MainActivity.userName))
             {
                 isJoined = true;
-                postButton.setText("Drop");
+                postButton.setText("Check In");
+                cancelButton.setText("Drop");
             }
             else
             {
                 isJoined = false;
-
                 postButton.setText("Join");
+                cancelButton.setText("Cancel");
             }
 
+        }
+        else{
+            postButton.setText("Update");
+            cancelButton.setText("Cancel");
         }
     }
 
     public void onClick(View v){
         switch (v.getId()) {
             case R.id.cancel_browse_event_button:
-                new AlertDialog.Builder(this)
-                        .setTitle("Warning")
-                        .setMessage("Do you really want to delete the event?")
-                        .setNeutralButton("Delete It", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                GcmApiWrapper.deleteEvent(event.getTitle());
-                                Toast.makeText(getApplicationContext(), "Event "+ event.getTitle() + "is deleted.", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .show();
+                if(isHost) {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Warning")
+                            .setMessage("Do you really want to delete the event?")
+                            .setNeutralButton("Delete It", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    GcmApiWrapper.deleteEvent(event.getTitle());
+                                    Toast.makeText(getApplicationContext(), "Event " + event.getTitle() + "is deleted.", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .show();
+                }
+                else{
+                    dropEvent();
+                }
                 break;
             case R.id.post_browse_event_button:
                 if(isHost)
                     updateEvent();
                 else
-                    if(isJoined)
-                        dropEvent();
-                    else
-                        joinEvent();
+                if(isJoined)
+                    checkIn();
+                else
+                    joinEvent();
                 break;
+            case R.id.check_attendance_browse_event_button:
+                checkAttendance();
             default:
                 break;
         }
     }
 
+    private void checkAttendance(){
+        String attendanceCode;
+        //generate random authentication string
+        attendanceCode = "QgTyB";  //string generation code still needed
+        //push authentication string to database
+        event.setAttendanceCode(attendanceCode);
+        //Display Authentication Code to Host
+        new AlertDialog.Builder(this)
+                .setTitle("Attendance Code")
+                .setMessage(attendanceCode)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+    private void checkIn(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Check In Code");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                authentication = input.getText().toString();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+        //check authentication variable against database
+        String attendance_code =event.getAttendanceCode();
+
+        //if validated, add user to list of validated participants
+
+
+
+        //And notify the user of success
+        if(authentication == attendance_code){
+            builder = new AlertDialog.Builder(this);
+            builder.setTitle("Check In");
+            builder.setMessage("Authentication Successful");
+            // Set up the buttons
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.show();
+        }
+        //else display an error message to the user
+        else {
+            builder = new AlertDialog.Builder(this);
+            builder.setTitle("Check In");
+            builder.setMessage("Invalid Check In Code");
+            // Set up the buttons
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            builder.show();
+        }
+    }
     private void dropEvent()
     {
         GcmApiWrapper.deleteParticipant(event.getTitle(), MainActivity.userName);
@@ -160,7 +253,6 @@ public class EventDetailsActivity extends Activity {
         startDate.setMinutes(34);
         //Date endDate=new Date(startDate.getTime() + 20 * 3600000);
         DateTime start_date=new DateTime(startDate, timeZone);
-
         Date endDate = new Date();
         endDate.setYear (2014 - 1900);
         endDate.setMonth(11-1);

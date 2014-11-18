@@ -33,6 +33,7 @@ public class EventRecord {
     private String start_date;
     private String end_date;
     private String description;
+    private String attendance_code;
 
     public final static int BEFORE =1;
     public final static int ONGOING =2;
@@ -44,6 +45,7 @@ public class EventRecord {
     private long timeStamp;
 
     private ArrayList<String> participants = new ArrayList<String>();
+    private ArrayList<String> validatedParticipants = new ArrayList<String>();
 
     public EventRecord() {}
 
@@ -58,9 +60,11 @@ public class EventRecord {
         this.host = host;
         this.host_url = host_url;
         this.extraContactInfo = extraContactInfo;
+        this.attendance_code = "";
 
         this.status = BEFORE; // the status is BEFORE when it is created.
         participants = new ArrayList<String>();
+        validatedParticipants = new ArrayList<String>();
 
         DateTime dt = new DateTime(new Date());
         timeStamp = dt.getValue();
@@ -112,10 +116,20 @@ public class EventRecord {
         if(!participants.contains(participant))
             this.participants.add(participant);
     }
+
     public void deleteParticipant(String participant){
         if(participants.contains(participant))
             this.participants.remove(participant);
     }
+    public void addValidatedParticipant(String participant){
+        if(!validatedParticipants.contains(participant))
+            this.validatedParticipants.add(participant);
+    }
+    public List<String> getValidatedParticipants(){
+        return this.validatedParticipants;
+    }
+    public void setAttendanceCode(String attendance_code){this.attendance_code = attendance_code;}
+    public String getAttendanceCode(){return  this.attendance_code;}
     public List<String> getParticipants(){
         return this.participants;
     }
@@ -147,9 +161,17 @@ public class EventRecord {
         builder.append(host);                           builder.append(";");
         builder.append(host_url);                       builder.append(";");
         builder.append(extraContactInfo);               builder.append(";");
+
         for(String participant: participants ){
             builder.append(participant);                builder.append(",");
         }
+        builder.append(";");
+
+        for(String participant: validatedParticipants){
+            builder.append(participant);                builder.append(",");
+        }
+        builder.append(";");
+        builder.append(attendance_code);
         //builder.append(";"); // no need for the last field
         return builder.toString();
     }
@@ -183,6 +205,10 @@ public class EventRecord {
         ArrayList<String> new_event_participantsList = new ArrayList<String>(participantsArray.length);
         for(int i=0;i<participantsArray.length;i++)
             new_event_participantsList.add(participantsArray[i]);
+        String new_event_valid_participants = components[11];
+        String[] validParticipantsArray = new_event_valid_participants.split(",");
+        ArrayList<String> new_event_valid_participantsList = new ArrayList<String>(validParticipantsArray.length);
+        String new_event_attendance_code = components[12];
 
         new_event.setTitle(new_event_title);
         new_event.setCategory(new_event_category);
@@ -195,6 +221,8 @@ public class EventRecord {
         new_event.setHost_url(new_event__host_url);
         new_event.setExtraContactInfo(new_event_extraContactInfo);
         new_event.participants = new_event_participantsList;
+        new_event.validatedParticipants = new_event_valid_participantsList;
+        new_event.attendance_code = new_event_attendance_code;
 
         return new_event;
     }

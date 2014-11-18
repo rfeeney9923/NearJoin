@@ -51,5 +51,7 @@
 
     <string name="host_image_description">Host Image Description</string>
 
+    <string name = "title_activity_settings">Settings</string>
+
 
 </resources>
