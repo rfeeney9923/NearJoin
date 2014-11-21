@@ -108,6 +108,8 @@ public class MainActivity extends Activity {
 
                             HashMap<String,String> new_cell_data = getCellDataFromEvent(event);
                             eventListFragment.updateData(event_category,new_cell_data);
+
+                           // mapEventFragment.updateData(event);
                         }
                     } else {
                         Toast.makeText(MainActivity.this, "EVENT failed",Toast.LENGTH_LONG).show();

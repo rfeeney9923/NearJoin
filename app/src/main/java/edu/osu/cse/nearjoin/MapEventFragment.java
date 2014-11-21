@@ -20,8 +20,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import edu.ohio_state.cse.nearjoin.eventbackend.myEvent.model.EventRecord;
 
 /**
  * Created by Fish on 11/11/2014.
@@ -43,12 +47,29 @@ public class MapEventFragment extends MapFragment implements GooglePlayServicesC
     private static final long FASTEST_INTERVAL =
             MILLISECONDS_PER_SECOND * FASTEST_INTERVAL_IN_SECONDS;
 
+    public ArrayList<EventRecord> studyList = new ArrayList<EventRecord>();
+    public ArrayList<EventRecord> sportList = new ArrayList<EventRecord>();
+    public ArrayList<EventRecord> entertainmentList = new ArrayList<EventRecord>();
+    public ArrayList<EventRecord> othersList = new ArrayList<EventRecord>();
+
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     LocationClient mLocationClient;
     Location mCurrentLocation;
     LocationRequest mLocationRequest;
 
+    public void updateData(int c, EventRecord data)
+    {
+        switch (c){
+            case 1: studyList.add(data); ;  break;
+            case 2: sportList.add(data);  break;
+            case 3: entertainmentList.add(data);   break;
+            case 4: othersList.add(data);  break;
+            default:othersList.add(data);break;
+        }
+        //updateMarkers();
+        //placeMarkersOfEvents(data);
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -154,11 +175,11 @@ public class MapEventFragment extends MapFragment implements GooglePlayServicesC
         return location;
     }
 
-    /*
+
         private void placeMarkersOfEvents(ArrayList<EventRecord> events){
             for (EventRecord event : events){
                 // Get address of location
-                String address = event.getLocationAddress();
+                String address = event.getLocation();
                 LatLng location = getLatLngFromAddress(address);
                 MarkerOptions markOpts = new MarkerOptions().position(location);
                 // Add other details to marker
@@ -166,7 +187,7 @@ public class MapEventFragment extends MapFragment implements GooglePlayServicesC
             }
         }
 
-    */
+
     private void drawRadiusAroundLocation(Location location) {
         this.mMap.clear();
         CircleOptions circleOptions = new CircleOptions()

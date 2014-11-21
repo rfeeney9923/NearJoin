@@ -48,7 +48,7 @@ public class EventListFragment extends ListFragment {
         entertainmentAdapter = new SimpleAdapter(getActivity().getBaseContext(), entertainmentList, R.layout.event_listrow, from, to);
         othersAdapter = new SimpleAdapter(getActivity().getBaseContext(), othersList, R.layout.event_listrow, from, to);
         searchAdapter = new SimpleAdapter(getActivity().getBaseContext(), searchList, R.layout.event_listrow, from, to);
-        othersAdapter = new SimpleAdapter(getActivity().getBaseContext(), othersList, R.layout.event_listrow, from, to);
+
     }
 
     @Override
