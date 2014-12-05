@@ -54,6 +54,20 @@
     <string name="host_image_description">Host Image Description</string>
 
     <string name = "title_activity_settings">Settings</string>
+    <string-array name="Categories">
+    <item></item>
+    <item>Study</item>
+    <item>Sports</item>
+    <item>Entertainment</item>
+    <item>Other</item>
+</string-array>
 
+    <string-array name="Duration">
+        <item></item>
+        <item>Less Than 30 Minutes</item>
+        <item>30 Minutes to an Hour</item>
+        <item>1-2 Hours</item>
+        <item>More Than 2 Hours</item>
+    </string-array>
 
 </resources>

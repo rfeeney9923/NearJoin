@@ -4,4 +4,4 @@
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:text="Large Text"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textView"></TextView>
+    android:id="@+id/duration_post_event_editText"></TextView>

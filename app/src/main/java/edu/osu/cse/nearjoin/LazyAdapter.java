@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class LazyAdapter extends ArrayAdapter<EventRecord> {
             vi = inflater.inflate(R.layout.event_listrow, parent, false);
 
         TextView title = (TextView)vi.findViewById(R.id.title_post_event_editText); // title
-        TextView time = (TextView)vi.findViewById(R.id.time_browse_event_editText); // time
+        TimePicker time = (TimePicker)vi.findViewById(R.id.browse_event_timePicker); // time
         TextView duration = (TextView)vi.findViewById(R.id.duration_post_event_editText); // duration
         TextView location = (TextView)vi.findViewById(R.id.location_browse_event_editText); // location
         TextView participants = (TextView)vi.findViewById(R.id.eventParticipant_cell_listView);
@@ -48,7 +49,11 @@ public class LazyAdapter extends ArrayAdapter<EventRecord> {
 
         // Setting all values in listview
         title.setText(event.getTitle());
-        time.setText(event.getStartDate());
+        //time.setText(event.getStartDate());
+        String tmpTime = event.getStartDate();
+        String[] hourMinute = tmpTime.split(":");
+        time.setCurrentHour(Integer.parseInt(hourMinute[0]));
+        time.setCurrentMinute(Integer.parseInt(hourMinute[1]));
         duration.setText(event.getEndDate());
         location.setText(event.getLocation());
         participants.setText(event.getParticipants().toString());

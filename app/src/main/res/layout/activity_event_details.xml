@@ -1,188 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/title_post_event_text"
-        android:layout_alignParentStart="true" />
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/title_post_event_text"
+            android:id="@+id/textView2"
+            android:layout_weight="0.20" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:id="@+id/title_browse_event_editText"
+            android:layout_weight="0.64" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/time_post_event_text"
+            android:id="@+id/textView6"
+            android:layout_weight="0.57" />
+
+        <TimePicker
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/browse_event_timePicker" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/time_post_event_text"
-        android:id="@+id/textView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="26dp" />
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/duration_post_event_text"
+            android:id="@+id/textView7"
+            android:layout_weight="0.32" />
+
+        <Spinner
+            android:layout_width="206dp"
+            android:layout_height="38dp"
+            android:id="@+id/duration_browse_event_spinner"
+            android:layout_weight="0.13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/duration_post_event_text"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="31dp" />
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/location_post_event_text"
+            android:id="@+id/textView8"
+            android:layout_weight="0.10" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:id="@+id/location_browse_event_editText"
+            android:layout_weight="0.73" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/location_post_event_text"
-        android:id="@+id/textView7"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="33dp" />
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/category_post_event_text"
+            android:id="@+id/textView9"
+            android:layout_weight="0.33" />
+
+        <Spinner
+            android:layout_width="161dp"
+            android:layout_height="35dp"
+            android:id="@+id/category_browse_event_spinner"
+            android:layout_weight="0.35" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="36dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/phone_post_event_text"
+            android:id="@+id/textView13"
+            android:layout_weight="0.64" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/phone_browse_event_editText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/category_post_event_text"
-        android:id="@+id/textView8"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="25dp" />
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/phone_post_event_text"
-        android:id="@+id/textView9"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/description_post_event_text"
+            android:id="@+id/textView14"
+            android:layout_weight="0.08" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/description_post_event_text"
-        android:id="@+id/textView13"
-        android:layout_below="@+id/textView9"
-        android:layout_alignEnd="@+id/textView7"
-        android:layout_marginTop="28dp" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="66dp"
+            android:id="@+id/description_browse_event_editText"
+            android:layout_weight="0.77" />
+    </LinearLayout>
 
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/cancel_browse_event_button"
-        android:layout_toEndOf="@+id/textView9"
-        android:onClick="onClick"
-        android:text="@string/cancel_post_event_button_text"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView13" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="127dp"
+        android:weightSum="1">
 
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="@string/post_post_event_button_text"
-        android:id="@+id/post_browse_event_button"
-        android:layout_toEndOf="@+id/cancel_browse_event_button"
-        android:onClick="onClick"
-        android:layout_below="@+id/participants_browse_event_editText" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/participants_browse_event_text"
+            android:id="@+id/textView15"
+            android:layout_weight="0.07" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/title_browse_event_editText"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView7"
-        android:layout_alignParentEnd="true"
-        android:inputType="text" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:id="@+id/participants_browse_event_editText"
+            android:layout_weight="0.76" />
+    </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/time_browse_event_editText"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toEndOf="@+id/textView13"
-        android:layout_alignParentEnd="true" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/duration_browse_event_editText"
-        android:layout_alignTop="@+id/textView6"
-        android:layout_alignStart="@+id/time_browse_event_editText"
-        android:layout_alignEnd="@+id/time_browse_event_editText" />
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancel_browse_event_button"
+            android:onClick="onClick"
+            android:text="@string/cancel_post_event_button_text" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPostalAddress"
-        android:ems="10"
-        android:id="@+id/location_browse_event_editText"
-        android:layout_alignTop="@+id/textView7"
-        android:layout_toEndOf="@+id/textView7"
-        android:layout_alignEnd="@+id/duration_browse_event_editText" />
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/post_post_event_button_text"
+            android:id="@+id/post_browse_event_button"
+            android:onClick="onClick"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/phone_browse_event_editText"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/location_browse_event_editText"
-        android:layout_alignEnd="@+id/category_browse_event_editText" />
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/attendance_post_event_button_text"
+            android:id="@+id/check_attendance_browse_event_button"
+            android:onClick="onClick" />
+    </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/description_browse_event_editText"
-        android:layout_alignTop="@+id/textView13"
-        android:layout_alignEnd="@+id/phone_browse_event_editText"
-        android:layout_alignStart="@+id/phone_browse_event_editText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/category_browse_event_editText"
-        android:layout_alignTop="@+id/textView8"
-        android:layout_toEndOf="@+id/textView6"
-        android:inputType="number"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/participants_browse_event_text"
-        android:layout_below="@+id/textView13"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="44dp"
-        android:id="@+id/textView14" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/participants_browse_event_editText"
-        android:layout_toEndOf="@+id/textView13"
-        android:layout_alignTop="@+id/textView14"
-        android:layout_alignEnd="@+id/description_browse_event_editText"
-        android:layout_above="@+id/cancel_browse_event_button" />
-
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="@string/attendance_post_event_button_text"
-        android:id="@+id/check_attendance_browse_event_button"
-        android:layout_toEndOf="@+id/post_browse_event_button"
-        android:layout_alignParentBottom="true"
-        android:onClick="onClick" />
-
-</RelativeLayout>
+</LinearLayout>

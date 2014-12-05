@@ -7,10 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +24,21 @@ import edu.ohio_state.cse.nearjoin.eventbackend.myEvent.model.EventRecord;
 /**
  * Created by Fish on 11/14/2014.
  */
-public class EventDetailsActivity extends Activity {
+public class EventDetailsActivity extends Activity implements AdapterView.OnItemSelectedListener{
 
     private Button cancelButton;
     private Button postButton;
     private Button attendanceButton;
     private EditText titleEditText;
-    private EditText timeEditText;
-    private EditText durationEditText;
+    //private EditText timeEditText;
+    private TimePicker eventTimePicker;
+    //private EditText durationEditText;
+    private Spinner durationSpinner;
+    private String durationSelection;
     private EditText locationEditText;
-    private EditText categoryEditText;
+    //private EditText categoryEditText;
+    private Spinner categorySpinner;
+    private int categorySelection;
     private EditText phoneEditText;
     private EditText descriptionEditText;
     private EditText participantsEditText;
@@ -57,19 +67,37 @@ public class EventDetailsActivity extends Activity {
 
         titleEditText = (EditText) findViewById(R.id.title_browse_event_editText);
         titleEditText.setText(event.getTitle());
-        durationEditText = (EditText) findViewById(R.id.duration_browse_event_editText);
-        durationEditText.setText(event.getEndDate());
-        timeEditText = (EditText) findViewById(R.id.time_browse_event_editText);
-        timeEditText.setText(event.getStartDate());
+        //durationEditText = (EditText) findViewById(R.id.duration_browse_event_editText);
+        // durationEditText.setText(event.getEndDate());
+        durationSpinner = (Spinner) findViewById(R.id.duration_browse_event_spinner);
+        durationSpinner.setSelection(Integer.parseInt(event.getEndDate()));
+        //timeEditText = (EditText) findViewById(R.id.time_browse_event_editText);
+        //timeEditText.setText(event.getStartDate());
+        eventTimePicker = (TimePicker) findViewById(R.id.browse_event_timePicker);
+        String tmpTime = event.getStartDate();
+        String[] hourMinute = tmpTime.split(":");
+        eventTimePicker.setCurrentHour(Integer.parseInt(hourMinute[0]));
+        eventTimePicker.setCurrentMinute(Integer.parseInt(hourMinute[1]));
         locationEditText = (EditText) findViewById(R.id.location_browse_event_editText);
         locationEditText.setText(event.getLocation());
-        categoryEditText = (EditText) findViewById(R.id.category_browse_event_editText);
-        categoryEditText.setText(event.getCategory().toString());
+        //categoryEditText = (EditText) findViewById(R.id.category_browse_event_editText);
+        //categoryEditText.setText(event.getCategory().toString());
+        categorySpinner = (Spinner) findViewById(R.id.category_browse_event_spinner);
+        categorySpinner.setSelection(event.getCategory());
         phoneEditText = (EditText) findViewById(R.id.phone_browse_event_editText);
         phoneEditText.setText(event.getExtraContactInfo());
         descriptionEditText = (EditText)findViewById(R.id.description_browse_event_editText);
         descriptionEditText.setText(event.getDescription());
         participantsEditText = (EditText)findViewById(R.id.participants_browse_event_editText);
+
+
+        ArrayAdapter categoryAdapter = ArrayAdapter.createFromResource(this,R.array.Categories,android.R.layout.simple_spinner_item);
+        categorySpinner.setAdapter(categoryAdapter);
+        categorySpinner.setOnItemSelectedListener(this);
+
+        ArrayAdapter durationAdapter = ArrayAdapter.createFromResource(this,R.array.Duration,android.R.layout.simple_spinner_item);
+        durationSpinner.setAdapter(durationAdapter);
+        durationSpinner.setOnItemSelectedListener(this);
 
         List<String> participants = event.getParticipants();
         StringBuilder builder = new StringBuilder(512);
@@ -82,10 +110,13 @@ public class EventDetailsActivity extends Activity {
         if(!isHost)
         {
             titleEditText.setEnabled(false);
-            durationEditText.setEnabled(false);
-            timeEditText.setEnabled(false);
+            //durationEditText.setEnabled(false);
+            durationSpinner.setEnabled(false);
+            //timeEditText.setEnabled(false);
+            eventTimePicker.setEnabled(false);
             locationEditText.setEnabled(false);
-            categoryEditText.setEnabled(false);
+            //categoryEditText.setEnabled(false);
+            categorySpinner.setEnabled(false);
             phoneEditText.setEnabled(false);
             descriptionEditText.setEnabled(false);
             attendanceButton.setEnabled(false);
@@ -232,10 +263,12 @@ public class EventDetailsActivity extends Activity {
     private void updateEvent()
     {
         String title = titleEditText.getText().toString();
-        String time = timeEditText.getText().toString();
-        String duration = durationEditText.getText().toString();
+        //String time = timeEditText.getText().toString();
+        String time = eventTimePicker.getCurrentHour() + ":" + eventTimePicker.getCurrentMinute();
+        //String duration = durationEditText.getText().toString();
+        String duration = durationSelection;
         String location = locationEditText.getText().toString();
-        int category = Integer.parseInt(categoryEditText.getText().toString());
+        int category = categorySelection;
         String phone = phoneEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
 
@@ -302,5 +335,24 @@ public class EventDetailsActivity extends Activity {
             participantsList.add(participantsArray[i]);
         event.setParticipants(participantsList);
         event.setCategory(extras.getInt("category"));
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        switch (adapterView.getId()){
+            case R.id.duration_browse_event_spinner:
+                //set duration variable
+                durationSelection = Integer.toString(i);
+                break;
+            case R.id.category_browse_event_spinner:
+                categorySelection = i;
+                //set category variable
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
